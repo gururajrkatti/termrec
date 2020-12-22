@@ -34,3 +34,18 @@ matrix:
         WCC: i686-w64-mingw32-gcc
       script: ./autogen.sh && ./configure --host=i686-w64-mingw32 CC=$WCC && make
       after_failure: cat config.log
+# Power job
+    - name: "Ubuntu ppc64le"
+      os: linux
+      dist: bionic
+      arch: ppc64le
+      addons:
+        apt:
+          packages:
+          - libz-dev
+          - libbz2-dev
+          - liblzma-dev
+          - libzstd-dev
+          - libcurl4-gnutls-dev
+      script: ./autogen.sh && ./configure && make check
+      after_failure: cat tests/testsuite.log
